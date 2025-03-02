@@ -1,10 +1,14 @@
-return {
-  "alexghergh/nvim-tmux-navigation",
-  config = function()
-    require('nvim-tmux-navigation').setup({})
-    vim.keymap.set("n", "<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>", {})
-    vim.keymap.set("n", "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", {})
-    vim.keymap.set("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", {})
-    vim.keymap.set("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", {})
-  end,
-}
+-- for now this is not working so we comment it.
+-- return {
+--   "christoomey/nvim-tmux-navigation",
+--   lazy = false,
+--   config = function()
+--     require('nvim-tmux-navigation').setup({})
+--     vim.keymap.set("n", "<C-h>", "<Cmd>NvimTmuxNavigateLeft<CR>", {})
+--     vim.keymap.set("n", "<C-j>", "<Cmd>NvimTmuxNavigateDown<CR>", {})
+--     vim.keymap.set("n", "<C-k>", "<Cmd>NvimTmuxNavigateUp<CR>", {})
+--     vim.keymap.set("n", "<C-l>", "<Cmd>NvimTmuxNavigateRight<CR>", {})
+--   end,
+--   url = "git@github.com:christoomey/vim-tmux-navigator.git",
+-- }
+return {}

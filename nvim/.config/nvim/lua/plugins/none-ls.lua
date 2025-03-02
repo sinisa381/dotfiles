@@ -1,19 +1,169 @@
-return {
-  "nvimtools/none-ls.nvim",
-  dependencies = {
-    "nvimtools/none-ls-extras.nvim",
-  },
-  config = function()
-    local null_ls = require("null-ls")
-    null_ls.setup({
-      sources = {
-        null_ls.builtins.formatting.stylua,
-        null_ls.builtins.formatting.prettierd,
-        null_ls.builtins.completion.spell,
-        require("none-ls.diagnostics.eslint"),
-      },
-    })
+return {}
+-- return {
+--   "nvimtools/none-ls.nvim",
+--   dependencies = {
+--     "nvimtools/none-ls-extras.nvim",
+--   },
+--   config = function()
+--     local null_ls = require("null-ls")
+--     null_ls.setup({
+--       sources = {
+--         require("none-ls.diagnostics.eslint_d"),
+--         null_ls.builtins.formatting.stylua,
+--         null_ls.builtins.formatting.prettier,
+--       },
+--     })
+--
+--     vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
+--   end,
+-- }
+--  return {
+--   "nvimtools/none-ls.nvim",
+--   dependencies = {
+--     "nvimtools/none-ls-extras.nvim",
+--   },
+--   config = function()
+--     local null_ls = require("null-ls")
+--
+--     null_ls.setup({
+--       sources = {
+--         -- Use stylua only for Lua files
+--         null_ls.builtins.formatting.stylua.with({
+--           extra_args = { "--quote-style", "AutoPreferSingle" },
+--         }),
+--         -- Prettierd for formatting supported frontend files
+--         null_ls.builtins.formatting.prettierd.with({
+--           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "html", "css", "json" },
+--         }),
+--
+--         -- Spell completion
+--         null_ls.builtins.completion.spell,
+--
+--         -- ESLint diagnostics via eslint_d
+--         null_ls.builtins.diagnostics.eslint_d,
+--       },
+--     })
+--
+--     -- Ensure vim.lsp.buf.format works correctly
+--     vim.keymap.set("n", "<leader>gf", function()
+--       vim.lsp.buf.format({ async = true })
+--     end, { desc = "Format current buffer" })
+--   end,
+-- }
+--
+-- return {
+--   "nvimtools/none-ls.nvim",
+--   dependencies = {
+--     "nvimtools/none-ls-extras.nvim",
+--   },
+--   config = function()
+--     local null_ls = require("null-ls")
+--
+--     -- Setup null-ls with sources
+--     null_ls.setup({
+--       sources = {
+--         -- Use stylua only for Lua files
+--         null_ls.builtins.formatting.stylua.with({
+--           extra_args = { "--quote-style", "AutoPreferSingle" },
+--         }),
+--         -- Prettierd for formatting supported frontend files
+--         null_ls.builtins.formatting.prettierd.with({
+--           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "html", "css", "json" },
+--         }),
+--         -- Spell completion
+--         null_ls.builtins.completion.spell,
+--         -- ESLint diagnostics via eslint_d with condition for .eslintrc.js
+--         null_ls.builtins.diagnostics.eslint_d.with({
+--           condition = function(utils)
+--             return utils.root_has_file("eslint.config.mjs")  -- Only enable eslint_d if this file is present in the project root
+--           end,
+--         }),
+--       },
+--
+--       -- Format on save
+--       on_attach = function(current_client, bufnr)
+--         if current_client.supports_method("textDocument/formatting") then
+--           -- Clear existing autocmds for the buffer and set a new one to format before saving
+--           vim.api.nvim_clear_autocmds({ group = "LspFormatting", buffer = bufnr })
+--           vim.api.nvim_create_autocmd("BufWritePre", {
+--             group = vim.api.nvim_create_augroup("LspFormatting", {}),
+--             buffer = bufnr,
+--             callback = function()
+--               vim.lsp.buf.format({
+--                 filter = function(client)
+--                   -- Use only null-ls for formatting
+--                   return client.name == "null-ls"
+--                 end,
+--                 bufnr = bufnr,
+--               })
+--             end,
+--           })
+--         end
+--       end,
+--     })
+--
+--     -- Keybinding to format the current buffer
+--     vim.keymap.set("n", "<leader>gf", function()
+--       vim.lsp.buf.format({ async = true })
+--     end, { desc = "Format current buffer" })
+--   end,
+-- }
 
-    vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format, {})
-  end,
-}
+-- return {
+--   "nvimtools/none-ls.nvim",
+--   dependencies = {
+--     "nvimtools/none-ls-extras.nvim",
+--   },
+--   config = function()
+--     local null_ls = require("null-ls")
+--     local builtins = null_ls.builtins
+--
+--     null_ls.setup({
+--       sources = {
+--         -- Prettier for formatting JavaScript, TypeScript, and other frontend files
+--         builtins.formatting.prettierd.with({
+--           filetypes = { "javascript", "typescript", "javascriptreact", "typescriptreact", "html", "css", "json" },
+--           extra_args = { "--semi", "true" },  -- Ensures semicolons are added
+--         }),
+--
+--         -- ESLint diagnostics via eslint_d
+--         builtins.diagnostics.eslint_d.with({
+--           condition = function(utils)
+--             return utils.root_has_file({
+--               ".eslintrc",
+--               ".eslintrc.json",
+--               ".eslintrc.js",
+--               "eslint.config.js",
+--               "eslint.config.mjs",
+--             })
+--           end,
+--           extra_args = {
+--             "--cache",  -- Use caching for performance
+--             "--cache-location", "node_modules/.cache/.eslintcache",  -- Cache location
+--           },
+--         }),
+--
+--         -- ESLint formatting via eslint_d
+--         builtins.formatting.eslint_d.with({
+--           condition = function(utils)
+--             return utils.root_has_file({
+--               ".eslintrc",
+--               ".eslintrc.json",
+--               ".eslintrc.js",
+--               "eslint.config.js",
+--               "eslint.config.mjs",
+--             })
+--           end,
+--         }),
+--
+--         -- Spell completion
+--         builtins.completion.spell,
+--       },
+--     })
+--
+--     -- Keybinding to trigger formatting with LSP
+--     vim.keymap.set("n", "<leader>gf", function()
+--       vim.lsp.buf.format({ async = true })
+--     end, { desc = "Format current buffer" })
+--   end,
+-- }
