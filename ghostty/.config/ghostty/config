@@ -1,0 +1,7 @@
+theme = light:Atom One Light,dark:Atom One Dark
+window-theme = system
+macos-option-as-alt = left
+font-size = 15
+cursor-style = block
+cursor-style-blink = false
+cursor-text = #000000
