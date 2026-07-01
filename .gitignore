@@ -8,3 +8,4 @@ session.*
 *.log
 *.tmp
 .DS_Store
+nvim/.config/oldnvim/

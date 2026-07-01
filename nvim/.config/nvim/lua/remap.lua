@@ -1,6 +1,11 @@
 vim.g.mapleader = " "
 
--- File Explorer
+local km = vim.keymap
+km.set("n", "<leader>xh", ":lua Snacks.notifier.show_history()<cr>", { silent = true, desc = "Notifier history" })
+
+-- Make visual yanks place the cursor back where started
+km.set("v", "y", "ygv<Esc>", { desc = "Yank and reposition cursor" })
+
 -- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 -- Move selected lines up/down
@@ -13,6 +18,8 @@ vim.keymap.set("n", "J", "mzJ`z")
 -- Scroll with cursor centered
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
+
+vim.keymap.set("n", "zz", "zt")
 
 -- Search with cursor centered
 vim.keymap.set("n", "n", "nzzzv")
@@ -61,4 +68,4 @@ vim.keymap.set("n", "<leader>xc", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", "<leader>er", "oif err != nil {<CR>}<Esc>Oreturn err<Esc>")
 
 -- Open config file
-vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>")
+--vim.keymap.set("n", "<leader>vpp", "<cmd>e ~/.dotfiles/nvim/.config/nvim/lua/theprimeagen/packer.lua<CR>")
